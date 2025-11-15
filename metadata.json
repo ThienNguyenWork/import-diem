@@ -1,0 +1,5 @@
+
+{
+  "name": "School Grade Management System",
+  "description": "An application for managing student grades, allowing teachers to import and export scores for different classes, subjects, and academic periods. It provides a clear interface for bulk score entry and result verification."
+}
