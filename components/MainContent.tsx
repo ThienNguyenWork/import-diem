@@ -40,6 +40,8 @@ const MainContent: React.FC<MainContentProps> = ({ onImportClick }) => {
     
     const tabs = ['LỚP 1, 2', 'LỚP 3', 'LỚP 4, 5'];
 
+    const isSubjectLocked = subject === 'Hoá';
+
     const handleImport = () => {
         onImportClick({
             schoolYear,
@@ -98,14 +100,34 @@ const MainContent: React.FC<MainContentProps> = ({ onImportClick }) => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Left Column: Update results */}
                         <div className="text-center p-6 rounded-lg border border-slate-200">
+                            {isSubjectLocked && (
+                                <p className="text-red-600 font-semibold mb-4">
+                                    Môn học đã được chốt và khoá sổ
+                                </p>
+                            )}
                             <h4 className="text-lg font-semibold text-slate-800">Cập nhật kết quả môn học</h4>
                             <p className="text-sm text-slate-500 mb-6">(Dành cho giáo viên bộ môn)</p>
                             
                             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-                                <button className="w-full sm:w-auto px-8 py-3 bg-teal-600 text-white font-semibold rounded-md shadow-sm hover:bg-teal-700 transition-colors">
+                                <button
+                                    disabled={isSubjectLocked}
+                                    className={`w-full sm:w-auto px-8 py-3 font-semibold rounded-md shadow-sm transition-colors ${
+                                        isSubjectLocked
+                                            ? 'bg-slate-400 text-slate-100 cursor-not-allowed'
+                                            : 'bg-teal-600 text-white hover:bg-teal-700'
+                                    }`}
+                                >
                                     Xuất file nhập liệu
                                 </button>
-                                <button onClick={handleImport} className="w-full sm:w-auto px-8 py-3 bg-indigo-700 text-white font-semibold rounded-md shadow-sm hover:bg-indigo-800 transition-colors">
+                                <button
+                                    onClick={handleImport}
+                                    disabled={isSubjectLocked}
+                                    className={`w-full sm:w-auto px-8 py-3 font-semibold rounded-md shadow-sm transition-colors ${
+                                        isSubjectLocked
+                                            ? 'bg-slate-400 text-slate-100 cursor-not-allowed'
+                                            : 'bg-indigo-700 text-white hover:bg-indigo-800'
+                                    }`}
+                                >
                                     Nhập file lên hệ thống
                                 </button>
                             </div>
